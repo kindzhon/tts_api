@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  tts-api:
+    build: .
+    container_name: tts-api
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=false
+    command: ["python", "run_api.py"]
+    restart: unless-stopped
+
+  tts-frontend:
+    build: .
+    container_name: tts-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - FRONTEND_HOST=0.0.0.0
+      - FRONTEND_PORT=8501
+      - API_URL=http://tts-api:8000
+      - DEBUG=false
+    depends_on:
+      - tts-api
+    command: ["python", "run_frontend.py"]
+    restart: unless-stopped

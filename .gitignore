@@ -1,1 +1,50 @@
-(empty)
+```
+# Audio files
+*.mp3
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.ENV
+.env
+.env.*
+.env.local
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.pot
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# Logs
+*.log
+
+# Environment specific
+.env
+.env.local
+*.env.*
+
+# Temporary files
+*.tmp
+*.swp
+*~
+.DS_Store
+Thumbs.db
+```
