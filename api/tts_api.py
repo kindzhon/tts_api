@@ -37,6 +37,10 @@ def create_api_app():
     """Create and configure the FastAPI application"""
     api_app = FastAPI(title="TTS API", description="Text-to-Speech API Service")
     
+    @api_app.get("/health")
+    async def health_check():
+        return {"status": "healthy", "service": "TTS API"}
+    
     @api_app.post("/api/tts", response_class=Response)
     async def tts_endpoint(payload: TTSPayload):
         try:

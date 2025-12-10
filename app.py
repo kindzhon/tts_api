@@ -14,11 +14,10 @@ from pathlib import Path
 
 def run_api_server():
     """Run the FastAPI server"""
-    from api.tts_api import app
     from config.settings import settings
     
     uvicorn.run(
-        app,
+        "api.tts_api:app",
         host=settings.API_HOST,
         port=settings.API_PORT,
         log_level="info" if settings.DEBUG else "warning"
@@ -28,19 +27,19 @@ def run_api_server():
 def run_frontend_server():
     """Run the Streamlit frontend"""
     from config.settings import settings
+    import subprocess
+    import sys
     
-    # Set environment variables for streamlit
-    os.environ['STREAMLIT_SERVER_PORT'] = str(settings.FRONTEND_PORT)
-    
-    # Run streamlit app
-    sys.argv = [
-        "streamlit", "run", 
+    # Run streamlit app using subprocess
+    cmd = [
+        sys.executable, "-m", "streamlit", "run", 
         "frontend/tts_frontend.py",
         "--server.address", settings.FRONTEND_HOST,
-        "--server.port", str(settings.FRONTEND_PORT)
+        "--server.port", str(settings.FRONTEND_PORT),
+        "--server.headless", "true"  # Don't automatically open browser
     ]
     
-    streamlit.web.cli.main()
+    subprocess.run(cmd)
 
 
 def main():

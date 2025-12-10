@@ -12,7 +12,7 @@ if __name__ == "__main__":
     print(f"🌍 API Server running on: {settings.api_url}")
     
     uvicorn.run(
-        app,
+        "api.tts_api:app",
         host=settings.API_HOST,
         port=settings.API_PORT,
         reload=settings.DEBUG,
